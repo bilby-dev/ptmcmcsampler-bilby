@@ -20,7 +20,7 @@ class PTMCMCSampler(MCMCSampler):
     list commonly used kwargs and the bilby defaults.
 
     Parameters
-    ==========
+    ----------
     Niter: int (2*10**4 + 1)
         The number of mcmc steps
     burn: int (5 * 10**3)

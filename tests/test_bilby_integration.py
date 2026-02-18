@@ -11,7 +11,7 @@ def sampler():
 
 @pytest.fixture(scope="session")
 def sampler_kwargs():
-    return dict(nsamples=100, nwalkers=50, burn_in_act=1, ntemps=1, frac_threshold=0.5)
+    return dict(Niter=101, burn=100, covUpdate=100, isave=100)
 
 
 @pytest.fixture

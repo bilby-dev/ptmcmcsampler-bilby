@@ -1,4 +1,5 @@
 import glob
+import os
 import shutil
 
 import numpy as np
@@ -150,7 +151,9 @@ class PTMCMCSampler(MCMCSampler):
         ]
         init_kwargs = {key: self.kwargs[key] for key in keys}
         if init_kwargs["outDir"] is None:
-            init_kwargs["outDir"] = f"{self.outdir}/ptmcmc_temp_{self.label}/"
+            init_kwargs["outDir"] = os.path.join(
+                self.outdir, f"ptmcmc_temp_{self.label}", ""
+            )
         return init_kwargs
 
     @property
@@ -229,7 +232,7 @@ class PTMCMCSampler(MCMCSampler):
             data = np.loadtxt(f"{temp_outDir}chain_1.txt")
         except OSError:
             data = np.loadtxt(f"{temp_outDir}chain_1.0.txt")
-        jumpfiles = glob.glob(f"{temp_outDir}/*jump.txt")
+        jumpfiles = glob.glob(os.path.join(temp_outDir, "*jump.txt"))
         jumps = map(np.loadtxt, jumpfiles)
         samples = data[:, :-4]
         loglike = data[:, -3]
